@@ -2,8 +2,13 @@
 
 namespace App\Infrastructure\Repository\Doctrine;
 
+use App\Application\Adapter\EntityToVO;
+use App\Application\Adapter\UserAdapter;
+use App\Application\Adapter\UserInputDTO;
 use App\Application\Repository\UserRepository;
+use App\Domain\Model\UserVO;
 use App\Infrastructure\Entity\User;
+use App\Infrastructure\Model\Input\UserInput;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -28,12 +33,14 @@ class MysqlUserRepository implements UserRepository
     }
 
     /**
-     * @param $id
+     * @param UserInput $userInput
      *
-     * @return User
+     * @return UserVO
      */
-    public function read($id): User
+    public function read(UserInput $userInput): UserVO
     {
-        return $this->em->getRepository(User::class)->find($id);
+        $userEntity = $this->em->getRepository(User::class)->find($userInput->getId());
+
+        return UserAdapter::EntityToVO($userEntity);
     }
 }

@@ -1,38 +1,29 @@
 <?php
 
-namespace App\Infrastructure\Entity;
+namespace App\Infrastructure\Model\Input;
 
-use Doctrine\ORM\Mapping as ORM;
+use App\Application\Model\Input\UserInputInterface;
 
-/**
- * @ORM\Entity()
- */
-class User
+class UserInput implements UserInputInterface
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
-
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
      */
     private $name;
-
     /**
-     * @ORM\Column(type="string", length=100)
+     * @var string
      */
     private $lastname;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $email;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $password;
 
@@ -47,9 +38,9 @@ class User
     /**
      * @param int $id
      *
-     * @return self
+     * @return UserInputInterface
      */
-    public function setId(int $id): self
+    public function setId(int $id): UserInputInterface
     {
         $this->id = $id;
 
@@ -67,9 +58,9 @@ class User
     /**
      * @param string $name
      *
-     * @return self
+     * @return UserInputInterface
      */
-    public function setName(string $name): self
+    public function setName(string $name): UserInputInterface
     {
         $this->name = $name;
 
@@ -87,9 +78,9 @@ class User
     /**
      * @param string $lastname
      *
-     * @return self
+     * @return UserInputInterface
      */
-    public function setLastname(string $lastname): self
+    public function setLastname(string $lastname): UserInputInterface
     {
         $this->lastname = $lastname;
 
@@ -97,9 +88,9 @@ class User
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getEmail(): string
+    public function getEmail(): int
     {
         return $this->email;
     }
@@ -107,9 +98,9 @@ class User
     /**
      * @param string $email
      *
-     * @return self
+     * @return UserInputInterface
      */
-    public function setEmail(string $email): self
+    public function setEmail(string $email): UserInputInterface
     {
         $this->email = $email;
 
@@ -117,9 +108,9 @@ class User
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getPassword(): string
+    public function getPassword(): int
     {
         return $this->password;
     }
@@ -127,27 +118,12 @@ class User
     /**
      * @param string $password
      *
-     * @return self
+     * @return UserInputInterface
      */
-    public function setPassword(string $password): self
+    public function setPassword(string $password): UserInputInterface
     {
         $this->password = $password;
 
         return $this;
-    }
-
-    public function __toArray()
-    {}
-
-    public function __toStdClass(): \stdClass
-    {
-        $stdUser = new \stdClass();
-        $stdUser->id($this->getId());
-        $stdUser->name($this->getName());
-        $stdUser->lastname($this->getLastname());
-        $stdUser->email($this->getEmail());
-        $stdUser->password($this->getPassword());
-
-        return $stdUser;
     }
 }

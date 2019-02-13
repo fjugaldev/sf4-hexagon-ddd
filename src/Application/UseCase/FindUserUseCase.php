@@ -2,9 +2,9 @@
 
 namespace App\Application\UseCase;
 
-use App\Application\Adapter\EntityToVO;
 use App\Application\Repository\UserRepository;
 use App\Domain\Model\UserVO;
+use App\Infrastructure\Model\Input\UserInput;
 
 class FindUserUseCase
 {
@@ -15,10 +15,8 @@ class FindUserUseCase
         $this->userRepository = $userRepository;
     }
 
-    public function execute(int $id): UserVO {
-        $userEntity = $this->userRepository->read($id);
-
-        return EntityToVO::transform($userEntity);
+    public function execute(UserInput $userInput): UserVO
+    {
+        return $this->userRepository->read($userInput);
     }
-
 }
