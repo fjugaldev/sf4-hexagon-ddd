@@ -3,12 +3,17 @@
 namespace App\Infrastructure\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity()
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class User
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

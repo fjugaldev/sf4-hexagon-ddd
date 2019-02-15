@@ -17,6 +17,6 @@ class FindUserUseCase
 
     public function execute(UserInput $userInput): UserVO
     {
-        return $this->userRepository->read($userInput);
+        return $this->userRepository->find($userInput);
     }
 }
